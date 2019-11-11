@@ -1,0 +1,132 @@
+Main Classes
+
+ejikConvou
+- ejikConvouConfig
+
+
+ejikConvouVehicle
+- ejikConvouVehicleOne
+- ejikConvouVehicleTwo
+- ejikConvouVehicleThree
+
+
+ejikConvouBotLoot
+- weaponBots
+- weaponSecondaryBots
+- rifleOptics
+- itemmy
+- uniform_bots
+- vst_bots
+- headgear_bots
+- backpack_bots
+- weaponVehicle
+- vehItemmy
+- vehBackpack_bots
+
+
+
+
+
+
+ejikConvouConfig
+
+classBoats = "O_Soldier_unarmed_F"; // The class of the bot itself
+rankBoats[] = {"CORPORAL","SERGEANT","LIEUTENANT","CAPTAIN","MAJOR","COLONEL"}; // List of ranks bots
+abilityBots[] = {0.5,0.6,0.7,0.8,0.9}; // Random list of rigidity bots. Formed from 0 to 1, for example 50% is 0.5
+countItemBots[] = {2,1,3}; /* The amount of arbitrary loot in the bots is comma-separated in the array. Take randomly */
+radiusNonPlayer = 1000; /* The radius in meters, checking for the presence of players, if there are no players, then after the finishing point, the convoy will disappear */
+radiusFiredNonPlayer = 200; /* The radius in meters, if during a shootout the player hid in what radius the convoy will look for him and will not leave until the player runs away or until he is killed :) */
+betweenTime = 5; /* Script delay. */
+betweenStartTimeConvoy = 20; /* The delay time of the script start after the server start. In seconds */
+betweenTimeConvoy = 60; /* Delay time between convoys */
+betweenTimeConvoyScript = 5; /* Convoy script check time */
+maxCount = 2; /* Maximum number of convoys on the map */
+DyCE_maxConvoyIdleTime = 60; /* The maximum number of seconds of the convoy. If it is idle on the card, it is simply removed.. */
+countPlayerOnline = 0; /* Maximum number of players online for a convoy spawn. */
+maxTimeStopConvoy = 80; /* If the convoy is in place from the beginning of the appearance, then we check whether it has moved or not. It happens on the map of the island and the point of the final path can become on the island and so that they do not stand in vain, we will clean them. */
+countWeaponVehicle[] = {2,1}; /* The number of arbitrary weapons in the technique is written with a comma in the array. Take randomly */
+countItemVehicle[] = {2,1,3}; /* The amount of arbitrary loot in the technique is written comma-separated in the array. Take randomly */
+countBackpackVehicle[] = {1}; /* The number of arbitrary backpacks in the technique is written with a comma in the array. Take randomly */
+radiusSpawnListConvoy = 100; /* The search radius of the pavement in a given random area. Value in meters. Decreasing the value may cause an explosion */
+minrespectKilledBoat = 50; /* The minimum value of the accrual respect for killing a bot */
+maxrespectKilledBoat = 100; /* The maximum value of the accrual respect for killing a bot */
+
+
+
+class ejikConvouVehicleOne
+
+DyCE_PlayerAllowedToTake = 1; /* 1 - Allow players to board vehicles. 0 - disable. Players will not be able to sit in this technique. */
+convoyMarkerVehicle = 1; /* 1 - Display the convoy on the map. 0 - do not display on the map. */
+vehicleMarkerColor = "ColorBlack"; // The color of the marker on the map. Available colors ColorGrey, ColorBlack, ColorRed, ColorBrown, ColorOrange, ColorYellow, ColorKhaki, ColorGreen, ColorBlue, ColorPink, ColorWhite
+vehicleMarkerName = "Convoy"; // The name of the marker. You can just leave blank
+convoyAlertVehicle = 1; /* 1 - Display a message that a convoy appeared. 0 - do not display. */
+vehicleAlertTitle = "Convoy Reported"; // Alert header
+vehicleAlertContent = "Convoy operations have been reported in the region."; // Opposition text
+speedLimitedVehicle = 50; /* The speed limit technology. If you have a different technique, then so that it goes at the same speed */
+exileMoneyMin = 50; /* Put the minimum value of play money in the car.. */
+exileMoneyMax = 100; /* Put the max value of play money in the car... */
+exileBotMoneyMin = 0; /* We set the minimum value of game money for bots. */
+exileBotMoneyMax = 10; /* We set the max value of game money for bots. */
+dynamicLootOn = 1; /* Add dynamic loot from class ejikConvouBotLoot. 0 - do not add, 1 - add */
+vehicleList[] =
+{
+	{			
+		 "B_MRAP_01_gmg_F", // Vehicle class        
+		 4, // The number of bots in the car
+		 {
+			 {"srifle_DMR_03_F",1,1},
+			 {"20Rnd_762x51_Mag",3,2}                    
+		 }, // The first parameter is a class, the second parameter is a quantity. The third parameter is type. If this weapon is written 1, if it is ammunition, then we write 2, if this is a backpack, then we write 3, if it is any other loot, then we write 4.
+		 0 // object height. If this is a helicopter, it will appear in the air at the height indicated in this parameter. Write in meters.
+	 },
+	 {            
+		 "B_MRAP_01_gmg_F", // Vehicle class        
+		 4, // The number of bots in the car
+		 {}, // The first parameter is a class, the second parameter is a quantity. The third parameter is type. If this weapon is written 1, if it is ammunition, then we write 2, if this is a backpack, then we write 3, if it is any other loot, then we write 4.
+		 0 //object height. If this is a helicopter, it will appear in the air at the height indicated in this parameter. Write in meters.
+	},
+	{			
+		"O_Truck_03_transport_F", // Класс техники		
+		10, // Количество ботов в машине
+		{}, // Первый парамметр это класс, второй парамметр это количество. Третий парамметр это тип. Если это оружие то пишем 1, если это патроны то пишем 2, если это рюкзак то пишем 3, если это любой другой лут то пишем 4.
+		0 // высота объекта. Если это будет вертолет то он появится в воздухе на высоте указаной в этом парамметре. Пишите в метрах.
+	}
+};
+
+
+
+
+Controller Script
+
+
+_allVehicle = /* First time it runs this is empty
+_ejikConvouNextTimeConvou = /* Time between convoys
+_radiusNonPlayer = //Radius of player check to despawn
+_DyCE_maxConvoyIdleTime = 
+_maxTimeStopConvoy = //Checks if stuck?
+_countPlayerOnline = //Number of players required to be online
+_maxCount = //Max number of convoys
+_betweenTimeConvoy = //Timebwtween convoy launchs
+_ejikConvouArray = [] //Blanked out
+_newgroup = objNull
+
+
+CreateVehicle Script
+
+_allConvou = // Counts the number of vehicle classes defined
+_DyCE_maxConvoyIdleTime = // idle time for convoy before it is removed
+_maxTimeStopConvoy = // I think this looks for a stoped convoy
+_roadNew = //Find road segments in radius provided (Currently 50000!!!!)
+_road = // Get the pos of a local road segment by randomly selecting one from above
+_radiusSpawnListConvoy = //Radius used to find more roads around the chosen road spot
+_roadses = //Road segments withen the range above
+_countItemVehicle = // Number of loot items in vehicle
+_vehItemmy = //Specific classnames of loot in vehicle
+_countBackpackVehicle = // Number of backpacks in vehicle
+_vehBackpack_bots = //Classnames of backpacks in vehicle
+_countWeaponVehicle = //Number of weapons in vehicle
+_vehLMGs = //Classnames of weapons in vehicle
+_newConvou = []; //Blank new convoy
+
+
+
