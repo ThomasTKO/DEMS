@@ -281,8 +281,9 @@ if((count _convoyConfigs) > 0)then//POLISHED
 					_masterConvoyList pushBack _newConvoy;//POLISHED
 					missionNamespace setVariable ["DyCE_masterConvoyArray",_masterConvoyList,true];//POLISHED
 					if (_convoyAnnounce) then//POLISHED
-					{//POLISHED
-						["popUp",_convoyAnnounceTitle, _convoyAnnounceText] call FrSB_fnc_announce;//POLISHED
+					{//POLISHED\
+						["toastRequest", ["InfoTitleAndText", [_convoyAnnounceTitle, _convoyAnnounceText]]] call ExileServer_system_network_send_broadcast;
+						//["popUp",_convoyAnnounceTitle, _convoyAnnounceText] call FrSB_fnc_announce;//POLISHED
 					}; //POLISHED
 				};//POLISHED
 				sleep 5;//POLISHED

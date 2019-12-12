@@ -14,11 +14,13 @@ _playerAllowedInVehicle = _vehicle getVariable ["DyCE_PlayerAllowedToTake",false
 //_allVehicle = missionNamespace getVariable "ejikConvouArray";
 if (isPlayer _unit) then//POLISHED
 {//POLISHED
-	["system","DyCE: This vehicle will despawn when the server reboots."] spawn FrSB_fnc_announce; //Insert generic temp vehicle message//POLISHED
+	["systemChatRequest", "DyCE: This vehicle will despawn when the server reboots."] call ExileServer_system_network_send_broadcast;
+	//["system","DyCE: This vehicle will despawn when the server reboots."] spawn FrSB_fnc_announce; //Insert generic temp vehicle message//POLISHED
 
     if !(_playerAllowedInVehicle) then//POLISHED
 	{//POLISHED
-		["system","Sorry","This is a stick-shift and you are a loser"] spawn FrSB_fnc_announce; //Insert kick out message here//POLISHED
+		["systemChatRequest", "Sorry, this is a stick-shift and you are a loser"] call ExileServer_system_network_send_broadcast;
+		//["system","Sorry","This is a stick-shift and you are a loser"] spawn FrSB_fnc_announce; //Insert kick out message here//POLISHED
 	    moveOut _unit;//POLISHED
 	};
 }else

@@ -16,6 +16,9 @@ This means there are still some weird bits of code that I am working out.  Pleas
 // Releases ////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////
 
+0.92 - Removed last of custom announcement code
+12/11/19
+
 0.91 - Major rewrite of launch code, install instructions and repairs to system
 12/11/19
 Corrected some major issues and added comments to files for customizations
