@@ -17,7 +17,7 @@
 //
 // To Do List:  	Add capability to change uniforms and models of rescue team, add timer to rescue team to evac with helicopter
 //		
-_dapeVer = "1.6";			
+_dapeVer = "1.7";			
 sleep 10;
 diag_log format ["[DAPE:%1] Dynamic Air Patrol Event online",_dapeVer];
  
@@ -48,6 +48,14 @@ _AIMoney = missionNamespace getVariable "DEMS_DAPE_AIMoney";
 _lootHeliPersist = missionNamespace getVariable "DEMS_DAPE_lootHeliPersist";
 _lootHeliProtected = missionNamespace getVariable "DEMS_DAPE_lootHeliProtected";
 _pincode = floor (random 9999);
+
+/************************************************************************************************/
+/** DEBUG SYSTEM ********************************************************************************/
+/** Turns on markers that show event activity and logs information about the mission ************/
+/** Also shortens mission for testing ***********************************************************/
+/** NOTE: This is now set in main config file for DEMS ******************************************/
+/************************************************************************************************/
+_debug = missionNamespace getVariable "DEMS_DAPE_debug";
 
 _AImodel_1 = missionNamespace getVariable "DEMS_DAPE_AImodel1";
 _AImodel_2 = missionNamespace getVariable "DEMS_DAPE_AImodel2";
@@ -95,15 +103,6 @@ if (_usingExile) then
 	};
 };
 
-
-/************************************************************************************************/
-/** DEBUG SYSTEM ********************************************************************************/
-/** Turns on markers that show event activity and logs information about the mission ************/
-/** Also shortens mission for testing ***********************************************************/
-/************************************************************************************************/
- 
-_debug = true; 
- 
  
 /************************************************************************************************/
 /** Random location settings ********************************************************************/

@@ -4,26 +4,50 @@
 // 	Developed by TheOneWhoKnocks		/////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 /*
-Version 0.92
+Version 0.93
 
 */
+CAMS_Version = "0.93";
+publicVariable "CAMS_Version";
+
+diag_log format ["[CAMS:%1] config.sqf: Launching...",CAMS_Version];
+
 
 // Set this to true if running with Exile.  Future development will seperate Exile dependencies
 DEMS_exileLoaded = true;	
 // Leave this alone
 FrSB_general_ExileLoaded = DEMS_exileLoaded;
+publicVariable "FrSB_general_ExileLoaded";
+publicVariableServer "FrSB_general_ExileLoaded";
 
+//////////////////////////////////////////////////////////////////////////////////
+// Custom Killfeed System	//////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+
+
+FrSB_killfeed_Enabled = true;					// Enables custom kill feed messages
+publicVariable "FrSB_killfeed_Enabled";
+FrSB_killfeed_LogKills = true; 					// Log kills into the players.rpt file
+publicVariable "FrSB_killfeed_LogKills";
+FrSB_killfeed_MessageDuration = 15; 			// Time in seconds the message stays on the screen
+publicVariable "FrSB_killfeed_MessageDuration";
+FrSB_killfeed_ShowHintText = true; 				// show Kill Message on the Top Mid Of the Screen
+publicVariable "FrSB_killfeed_ShowHintText";
+FrSB_killfeed_WeaponNameColor	= "#FFD700"; 	// Text Color of the Weapon's Name.
+publicVariable "FrSB_killfeed_WeaponNameColor";
+FrSB_killfeed_DistanceColor		= "#FFFFFF"; 	// Text Color of the kill Distance number.
+publicVariable "FrSB_killfeed_DistanceColor";
 
 //////////////////////////////////////////////////////////////////////////////////
 // Common Asset Manager System	//////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 
-DEMS_CAMS_useVanilla	= true;	// True - Loads Arma 3 Vanilla Content  False - Does not load vanilla assets
-DEMS_CAMS_cartList = 	[		// Name of CART directory , Description of Cart Contents
-							//"CUP", "CUP Assets",
-							//"RHS", "RHS Assets"
-							"vanilla","Arma 3 Default Assets",
-							"exile","Exile Server Assets"
+DEMS_CAMS_useVanilla	= true;	// True - Loads Arma 3 Vanilla Content | False - Does not load vanilla assets | NOTE: If set to false, you need to be sure you have a VERY clean cart file that fills all minimum needs for system to run
+DEMS_CAMS_useExile		= true;	// True - Loads Exile Content | False - Does not load exile assets
+
+DEMS_CAMS_cartList = 	[	// Name of CART directory 
+							"jets",
+							"apex"
 						];
 						
 
@@ -31,12 +55,13 @@ DEMS_CAMS_cartList = 	[		// Name of CART directory , Description of Cart Content
 // Dynamic Air Patrol Event Config	//////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 
-// Basic cofiguration
+// Basic configuration
+DEMS_DAPE_debug = false;					// TRUE - Turns on debug info for DAPE system and shortens timers | FALSE - System runs normal with no markers
 DEMS_DAPE_patrolHeight = 150;			// Fly in height for patrol and rescue operations
 DEMS_DAPE_delayQRF = 30;				// Time before QRF rescue heli launches after the crash
-DEMS_DAPE_interceptorPresent = true;	// TRUE - Interceptor launches and shoots down patrol | FALSE - Only patrol plane flies (Either way, land crash will generate rescure craft)
+DEMS_DAPE_interceptorPresent = true;	// TRUE - Interceptor launches and shoots down patrol | FALSE - Only patrol plane flies (Either way, land crash will generate rescue craft)
 DEMS_DAPE_AIMoney = 500;				// Max amount of money in AI pockets
-DEMS_DAPE_lootHeliPersist = false;		// TRUE - Vehicle is persistant and uses code defined below | FALSE - vehicle is not persistant
+DEMS_DAPE_lootHeliPersist = false;		// TRUE - Vehicle is persistent and uses code defined below | FALSE - vehicle is not persistent
 DEMS_DAPE_lootHeliProtected = true;		// TRUE - Loot heli cannot be shot down in transit     FALSE - Loot heli is vulnerable while it flies in
 
 
@@ -45,7 +70,7 @@ DEMS_DAPE_amountOfWeapons = 5+floor(random 5);
 DEMS_DAPE_amountOfItems = 7+floor(random 5);
 
 // Navigation system.  This allows you to define your own waypoints based on your map, or allow the system to select its own
-// NOTE: The waypopint finding system is pretty good and should be allowed to work, but if you want to mess with it....
+// NOTE: The waypoint finding system is pretty good and should be allowed to work, but if you want to mess with it....
 DEMS_DAPE_useMarkerWaypoints = false;	// FALSE - System generates it's own waypoints.  TRUE - You must define them in x,y
 DEMS_DAPE_wp1 = [8407,10285];			//These work for Tanoa and make the craft fly in a large X across the island
 DEMS_DAPE_wp2 = [2970,3416];			//The patrol aircraft will fly to waypoint 1, then cycle through 4, then back to 1
@@ -66,10 +91,9 @@ DEMS_DAPE_overrideDefaultGear = true;	// UNLESS you set this to false.  In that 
 // Dynamic Convoy Event Config	//////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 
-
-publicVariableServer "FrSB_general_ExileLoaded";
-
-DyCE_startDelay = 30;
+DyCE_monitorDelay = 5; 				// Script heartbeat delay. 
+DyCE_convoyDelay = 30; 				// Delay between convoys 
+DyCE_startDelay = 30;				// Delay before entire script starts, gives server time to settle
 DyCE_nextConvoyStartTime = time + DyCE_startDelay;
 DyCE_masterConvoyArray = [];
 DyCE_nextVehicleNumber = 0;
@@ -80,20 +104,19 @@ DyCE_aiItemCount = [3,6]; // The amount [min,max] of items that the AI will carr
 DyCE_aiRanks = ["CORPORAL","SERGEANT","LIEUTENANT","CAPTAIN","MAJOR","COLONEL"]; // List of potential AI ranks
 DyCE_aiSkill = [0.5,0.6,0.7,0.8,0.9]; // Random skill levels, will apply to overall "skill" 
 
-DyCE_monitorDelay = 5; 				// Script heartbeat delay. 
-DyCE_convoyDelay = 30; 				// Delay between convoys 
-DyCE_startDelay = 30; 				// Delay before launching first convoy
-
 DyCE_countBackpackVehicle = [1,3]; 	// The amount [min,max] of backpacks that the vehicle will spawn in with
 DyCE_countItemVehicle = [3,6]; 		// The amount [min,max] of items that the the vehicle will spawn in with
 DyCE_countWeaponVehicle = [2,4]; 	// The amount [min,max] of weapons that the vehicle will spawn in with
 
-DyCE_maxConvoys = 2; 				// Maximum number of convoys that canspawn at once
+DyCE_maxConvoys = 2; 				// Maximum number of convoys that can spawn at once
 DyCE_minPlayerOnline = 0; 			// Minimum number of players needed to be online for a convoy to spawn
 
 DyCE_exileLoaded = FrSB_general_ExileLoaded; // True if using with Exile
-DyCE_exileRespect = 100; 			// Exile respect given for AI kill
-DyCE_maxConvoyIdleTime = 60; 		// The maximum number of seconds of the convoy. If it is idle on the card, it is simply removed.. */
+publicVariable "DyCE_exileLoaded";
+publicVariableServer "DyCE_exileLoaded";
+
+DyCE_exileRespect = 100; 			// Exile respect given for AI kill (NOT WORKING YET)
+DyCE_maxConvoyIdleTime = 60; 		// The maximum number of seconds of the convoy. If it is idle on the map, it is simply removed.. */
 DyCE_maxConvoyStoppedTime = 80; 	// If the convoy is in place from the beginning of the appearance, then we check whether it has moved or not. It happens on the map of the island and the point of the final path can become on the island and so that they do not stand in vain, we will clean them. */
 
 DyCE_radiusSpawnVehicle = 100; 		// The search radius of the pavement in a given random area. Value in meters. Decreasing the value may cause an explosion */

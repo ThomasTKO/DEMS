@@ -47,11 +47,14 @@ if !(_vehicle isEqualTo objNull) then//POLISHED
 	_aiItemCount = missionNamespace getVariable "DyCE_aiItemCount";//POLISHED
 	_aiItems = missionNamespace getVariable "DyCE_Loot_aiItems";//POLISHED
 
-	_aiMoneyMin = _convoyData select 8;//POLISHED
-	_aiMoneyMax = _convoyData select 9;//POLISHED
+	_aiMoneyMin = _convoyData select 10;//POLISHED
+	_aiMoneyMax = _convoyData select 11;//POLISHED
 	_aiMoneyMid = _aiMoneyMin + ((_aiMoneyMax - _aiMoneyMin) / 2);//POLISHED
 	_aiMoney = ceil(random[_aiMoneyMin,ceil(_aiMoneyMid),_aiMoneyMax]);//POLISHED
 	_thisvehicle = _vehicle;//SHINY
+	
+	//diag_log format ["[DyCE] AI Money _aiMoneyMin:%1 | _aiMoneyMax:%2 | _aiMoneyMid:%3 | _aiMoney:%4 |",_aiMoneyMin,_aiMoneyMax,_aiMoneyMid,_aiMoney];//POLISHED
+
 	
 	//_nextUnit = 0;//????????????????????????????????
 	_aiCrew = [];//POLISHED
@@ -135,10 +138,13 @@ if !(_vehicle isEqualTo objNull) then//POLISHED
 				_newUnit addItem _itemAI;//POLISHED
 			};//POLISHED
 			
-			_newUnit setVariable ["ExileMoney", _aiMoney, true];//POLISHED					
+			_newUnit setVariable ["ExileMoney", _aiMoney, true];//POLISHED		
+			
+			//diag_log format ["[DyCE] AI Money Check: _aiMoney:%1 | AI actual money:%2 |",_aiMoney,(_newUnit getVariable "ExileMoney")];//POLISHED
+			
 			//_newUnit addMPEventHandler ["MPKilled", {[_this select 0, _this select 1, _this select 2] call FrSB_fnc_MPKilledEH;}];//SHINY
-			_newUnit addMPEventHandler ["MPKilled", {[_this select 0, _this select 1, _this select 2] call FrSB_fnc_unitKilledSFX;}];//SHINY
-			_newUnit addMPEventHandler ["MPHit", {[_this select 0, _this select 1, _this select 2, _this select 3] call FrSB_fnc_unitHitSFX;}];//SHINY
+			//_newUnit addMPEventHandler ["MPKilled", {[_this select 0, _this select 1, _this select 2] call FrSB_fnc_unitKilledSFX;}];//SHINY
+			//_newUnit addMPEventHandler ["MPHit", {[_this select 0, _this select 1, _this select 2, _this select 3] call FrSB_fnc_unitHitSFX;}];//SHINY
 
 			[_newUnit] joinSilent _newGroup;//POLISHED	
 			

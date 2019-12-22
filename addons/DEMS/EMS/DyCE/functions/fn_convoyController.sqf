@@ -83,7 +83,7 @@ if !(_allConvoys isEqualTo []) then//POLISHED
 				
 				if (_playerInVehicle) then//POLISHED
 				{//POLISHED
-					// This should clear all programming from the vehicle, make is ownable, etc
+					// This should clear all programming from the vehicle, make it ownable, etc
 				    if (_vehicleName in allMapMarkers) then//POLISHED
 					{//POLISHED
 						deleteMarker _vehicleName;//POLISHED
@@ -374,7 +374,7 @@ if !(_allConvoys isEqualTo []) then//POLISHED
 										
 										if (_debug) then
 										{
-											diag_log format["[DyCE] (convoyController) Vehicle (%1) has major damage, intiating repairs",_thisVehicle];//POLISHED
+											diag_log format["[DyCE] (convoyController) Vehicle (%1) has major damage, initiating repairs",_thisVehicle];//POLISHED
 										};
 										[_unitRepair,_vehiclePos,_x,_vehicleEndPos,_AIgroup] call DyCE_fnc_repairVehicle;//POLISHED
 									};

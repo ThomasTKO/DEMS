@@ -1,4 +1,10 @@
 
+if (missionNamespace getVariable "FrSB_killfeed_Enabled") then
+{
+	diag_log "FrSB KillFeed enabled";
+	[] call FrSB_fnc_FrSBKillfeed;
+};
+/*
 class CfgFunctions
 {
 	// Added for notification system
@@ -21,3 +27,4 @@ class notificationSystem
 	#include "functions\notificationSystem\config\config_master.hpp"
 };
 
+*/

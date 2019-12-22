@@ -17,8 +17,13 @@ scriptName "fn_announce";
 		- dynamic	- Fades in (then out) big white text in middle of screen
 		- info		- 
 		- sitrep	- Fades in text in lower right corner
+		- exileInfo - Exile Toast (Info) - Server side for now
+		- exileSucc	- Exile Toast (Success) - Server side for now
+		- exileWarn - Exile Toast (Warning) - Server side for now
+		- exileErr	- Exile Toast (Error) - Server side for now
+		- exileChat - Exile System Chat - Server side for now
 	
-	side - In Development
+		- side - In Development
 	
 	_messageTitle = Title of notification 
 	_messageBody = Body of notification
@@ -45,11 +50,7 @@ HEX_PURPLE = "#800080";
 HEX_ODGREEN = "#6B8E23";
 HEX_ORANGE = "#FFA500";
 
-
-
-
-if (isDedicated || !hasInterface) exitWith {};
-
+//if (isDedicated || !hasInterface) exitWith {};
 
 disableSerialization;
 
@@ -71,6 +72,32 @@ switch (_messageType) do {
 					};
 				};
 	*/
+	
+		 
+    case "exileInfo":	
+				{ 
+					["toastRequest", ["InfoTitleAndText", [_messageTitle, _messageBody]]] call ExileServer_system_network_send_broadcast;
+
+				};
+    case "exileSucc":	
+				{ 
+					["toastRequest", ["SuccessTitleAndText", [_messageTitle, _messageBody]]] call ExileServer_system_network_send_broadcast;
+				};
+    case "exileWarn":	
+				{ 
+					["toastRequest", ["WarningTitleAndText", [_messageTitle, _messageBody]]] call ExileServer_system_network_send_broadcast;
+				};
+    case "exileErr":	
+				{ 
+					["toastRequest", ["ErrorTitleAndText", [_messageTitle, _messageBody]]] call ExileServer_system_network_send_broadcast;
+				};
+    case "exileChat":	
+				{ 
+					["systemChatRequest", [format ["%1: %2",_messageTitle,_messageBody]]] call ExileServer_system_network_send_broadcast;
+				};
+
+	
+	
     case "hint":	
 				{ 
 					private _text = toUpper _messageTitle + ": " + _messageBody;
