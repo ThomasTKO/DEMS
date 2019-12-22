@@ -1,34 +1,29 @@
-/////////////////////////////////////////////////////////////////////////////
-//	DEMS - Dynamic Event Mission System			/////////////////////////////
-//	Created by TheOneWhoKnocks					/////////////////////////////
-//												/////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
+#DEMS - Dynamic Event Mission System
+###### Created by TheOneWhoKnocks
 
 DEMS is random mission generator designed to be easy to install into any 
 mission for Arma 3.  It allows for dynamic missions to be easily installed
 that can be configured to use your custom content.
 
-NOTE: This system has been developed from several other scripts that were abandoned and built into this one system.
+**NOTE**: This system has been developed from several other scripts that were abandoned and built into this one system.
 This means there are still some weird bits of code that I am working out.  Please be patient as I work through this system
 
 
-////////////////////////////////////////////////////////////
-// Releases ////////////////////////////////////////////////
-////////////////////////////////////////////////////////////
+*** Releases ***
 
-0.93 - Added debug code, corrected error in AI poptbas code, moved more configu items to the main config file
+*0.93* - Added debug code, corrected error in AI poptbas code, moved more configu items to the main config file
 Added in custom killfeed system for future fucntinality to add in respect code
 12/20/19
 
-0.92 - Removed last of custom announcement code
+*0.92* - Removed last of custom announcement code
 12/11/19
 
-0.91 - Major rewrite of launch code, install instructions and repairs to system
+*0.91* - Major rewrite of launch code, install instructions and repairs to system
 12/11/19
 Corrected some major issues and added comments to files for customizations
 I have a lon way to go and I'm adding in content when I have time
 
-0.9 - Beta release
+*0.9* - Beta release
 11/11/19
 
 This is the beta release of the DEMS system which inlcudes DyCE (Dynamic Convoy
@@ -37,9 +32,7 @@ Event) and DAPE (Dynamic Air Patrol Event).  It also includes the base CAMS syst
 content add-ons.  This version is being released for expanded testing and while 
 functional, still has some issues to be addressed.
 
-///////////////////////////////////////////////////////////
-// CAMS system ////////////////////////////////////////////
-///////////////////////////////////////////////////////////
+### CAMS system 
 
 The CAMS (Common Asset Management System) allows the customization of all of my releases
 by adding your own CART (Common Asset Resource Template) files that include all classnames
@@ -47,12 +40,12 @@ needed for your content and modifying the ImFX (Immersion FX) files to include t
 
 This system still needs full documentation but here is a rough outline.
 
-CART File - These files are located in the addons\DEMS\CAMS\carts\(content name) directories and 
+**CART File** - These files are located in the **addons\DEMS\CAMS\carts\(content name)** directories and 
 pre-load the global variables used throughout my add-ons.  You can use the existing files
 or the included template files to add your own CART file.  See installation and configuration 
 section on how to include your assets in the system.
 
-ImFX File - These files are located in the addons\DEMS\CAMS\carts\(content name) directories and 
+**ImFX File** - These files are located in the addons\DEMS\CAMS\carts\(content name) directories and 
 the ImmersionFX system uses the global variables from the CART system to populate
 additional global variables that are used in the actual code for the dynamic events and other
 add-ons.  While the CAMS system loads all content into the system, the ImFX system loads specific
@@ -60,15 +53,15 @@ content to be used by the game code.  For example, CAMS loads all content from A
 the ImFX system loads specific content into each variable like which patrol craft fly and which
 interceptors respond, as well as loot tables for all add ons. 
 
-//////////////////////////////////////////////////////
-// Installation (EXILE) //////////////////////////////
-//////////////////////////////////////////////////////
+### Installation (EXILE)
+
 To install the system, you must modify the following files with the content in this download.  
 
 1. Extract the files into your mission file \addon directory.  (Create this directory if it does not exist)
-The full path will be Exile.(missionMapName)\addons\DEMS and all folders and files will be located here
+The full path will be _Exile.(missionMapName)\addons\DEMS_ and all folders and files will be located here
 
-2. DESCRIPTION.EXT - Check to see if you already have a section in your file that looks like this:
+
+2. *DESCRIPTION.EXT* - Check to see if you already have a section in your file that looks like this:
 
 class CfgFunctions
 {
@@ -80,9 +73,10 @@ If you do please follow instrucutions labeled EXSITING CFG SECTION
 otherwise follow the instruitons labeled CLEAN INSTALL
 
 
-EXSITING CFG SECTION
+**EXSITING CFG SECTION**
 Modify your section as follows:
 
+```
 class CfgFunctions
 {
 	(SOME EXISTING CODE, ADD THIS AFTER...)
@@ -98,13 +92,15 @@ class CfgFunctions
 	
 	
 };	(BUT BEFORE THIS ENDING BRACKET)
-END SECTION, GO TO STRP 3
+```
+END SECTION, GO TO STEP 3
 
-CLEAN INSTALL
+**CLEAN INSTALL**
 
 Modify this file as follows:
 A) Near the top of your file you will see a sction like this:
 
+```
 #define true 1
 #define false 0
 // Required for the XM8, do not remove!
@@ -113,17 +109,17 @@ A) Near the top of your file you will see a sction like this:
 Add this to the next line and save your file
 
 #include "addons\DEMS\DEMS.hpp"
+```
 
+3. *INITSERVER.SQF* - Modify this file by adding the contents of SetupFiles\InitServer.sqf to the end of your file.
 
-3. INITSERVER.SQF - Modify this file by adding the contents of SetupFiles\InitServer.sqf to the end of your file.
+4. *INITPLAYERLOCAL.SQF* - Modify this file by adding this code somewhere near the top of your file on its own line:
 
-4. INITPLAYERLOCAL.SQF - Modify this file by adding this code somewhere near the top of your file on its own line:
+```
 #include "addons\DEMS\DEMSplayer.hpp"
-
+```
  
-//////////////////////////////////////////////////////
-// Configuration (EXILE) /////////////////////////////
-//////////////////////////////////////////////////////
+### Configuration (EXILE)
 
 Most of the DEMS and DAPE configuration can be found in the /addons/DEMS/config.sqf file
 This allows you to tweak most of the settings for both the main system as well as the DAPE system and some of the DyCE options
@@ -138,14 +134,12 @@ IMPORTANT OPTIONS:
 
 The DyCE system can be configured in two files.  Use the exising files as templates until I fully comment them
 
-/addons/DEMS/EMS/DyCE/convoyConfig.sqf - This lets you define the actual vehicles and configuration of the convoys
-/addons/DEMS/EMS/DyCE/lootConfig.sqf - This defines the type of loot that is being given to the AI in the convoy and the contents of the trucks
+_/addons/DEMS/EMS/DyCE/convoyConfig.sqf_ - This lets you define the actual vehicles and configuration of the convoys
+_/addons/DEMS/EMS/DyCE/lootConfig.sqf_ - This defines the type of loot that is being given to the AI in the convoy and the contents of the trucks
 
 NOTE: This will be moved to the main DEMS config file in future versions
 
-//////////////////////////////////////////////////////
-// Adding your custom content ////////////////////////
-//////////////////////////////////////////////////////
+### Adding your custom content
 
 The CAMS system requires a new directory to be created from the template files.  There are two files:
 Assets.sqf - Used mainly for the FuMS Mission Generator (Future integration, this has not been released
@@ -164,6 +158,7 @@ Say you are adding in assault rifle content for the RHS USAF add-on.
 3. You will see multiple groups that the CAMS system uses to integrate into Arma. Add the various classnames for your content into the appropriate section
 Example weapons section:
 
+```
 [
 		"CAMS_Pistols",4,true,
 		[
@@ -215,12 +210,14 @@ Example weapons section:
 		]
 	],
 	(REST OF FILE)
+```
 	
 4. Open the ImmersionFX.sqf file and add your custom content to the various sections.  DAPE and DyCE will use these 
 classnames for their mission variables
 
 For example, to customize the aircraft used in the DAPE mission for the RHS USAF content, you would modify the file like this:
 
+```
 	[
 		"ImFX_Air_Patrol",1,true,
 		// Aircrat that should be used in air patrol roles (Used specificaly by DAPE)
@@ -248,46 +245,43 @@ For example, to customize the aircraft used in the DAPE mission for the RHS USAF
 			"RHS_CH_47F","RHS_UH1Y","RHS_UH60M","RHS_UH60M_MEV","rhsusf_CH53E_USMC"
 		]
 	],
+```	
 	
-	
-5. Edit the /addons/DEMS/config.sqf file, line 48 and add in the name of the DIRECTORY you created
+5. Edit the _/addons/DEMS/config.sqf_ file, line 48 and add in the name of the DIRECTORY you created
 
 BEFORE:
 
+```
 DEMS_CAMS_cartList = 	[	// Name of CART directory 
 							"jets",
 							"apex"
 						];
-
+```
 AFTER:
-
+```
 DEMS_CAMS_cartList = 	[	// Name of CART directory 
 							"jets",
 							"apex",
 							"rhfusaf"
 						];
-
+```
 
 Save your file, re-PBO your missionfile, and enjoy.
 
-//////////////////////////////////////////////////////
-// Troubleshoting ////////////////////////////////////
-//////////////////////////////////////////////////////
+### Troubleshoting
 
 Most likely, you missed a comma, or addede an extra one at the end of the lists.  Check carefully.
 
 If you are having problems with any of the missions, turn on the debug mode for the problem
 module and we'll see if we can figure it out.
 
-//////////////////////////////////////////////////////
-// Known issues //////////////////////////////////////
-//////////////////////////////////////////////////////
+### Known issues
 
-1. Sometimes convoys crash - Yeah, Arma logic is tricky.  I'll keep playing with it but things are far from perfect
+- [ ] Sometimes convoys crash - Yeah, Arma logic is tricky.  I'll keep playing with it but things are far from perfect
 
-2. Players don't get respect for kills - Yeah, this is a lot of programming for little payoff.  I'll work on it over time
+- [ ] Players don't get respect for kills - Yeah, this is a lot of programming for little payoff.  I'll work on it over time
 
-3. Killfeed message doesn't record to the server.rpt - Thatll be in a future release, right now its on the players log
+- [ ] Killfeed message doesn't record to the server.rpt - Thatll be in a future release, right now its on the players log
 
-4. Killfeed sizing looks a little weird - Still working on it
+- [ ] Killfeed sizing looks a little weird - Still working on it
 
