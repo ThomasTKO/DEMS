@@ -1,4 +1,4 @@
-#DEMS - Dynamic Event Mission System
+# DEMS - Dynamic Event Mission System
 ###### Created by TheOneWhoKnocks
 
 DEMS is random mission generator designed to be easy to install into any 
@@ -9,7 +9,7 @@ that can be configured to use your custom content.
 This means there are still some weird bits of code that I am working out.  Please be patient as I work through this system
 
 
-*** Releases ***
+### Releases
 
 *0.93* - Added debug code, corrected error in AI poptbas code, moved more configu items to the main config file
 Added in custom killfeed system for future fucntinality to add in respect code
@@ -32,7 +32,7 @@ Event) and DAPE (Dynamic Air Patrol Event).  It also includes the base CAMS syst
 content add-ons.  This version is being released for expanded testing and while 
 functional, still has some issues to be addressed.
 
-### CAMS system 
+#### CAMS system 
 
 The CAMS (Common Asset Management System) allows the customization of all of my releases
 by adding your own CART (Common Asset Resource Template) files that include all classnames
@@ -53,7 +53,7 @@ content to be used by the game code.  For example, CAMS loads all content from A
 the ImFX system loads specific content into each variable like which patrol craft fly and which
 interceptors respond, as well as loot tables for all add ons. 
 
-### Installation (EXILE)
+#### Installation (EXILE)
 
 To install the system, you must modify the following files with the content in this download.  
 
@@ -63,10 +63,12 @@ The full path will be _Exile.(missionMapName)\addons\DEMS_ and all folders and f
 
 2. *DESCRIPTION.EXT* - Check to see if you already have a section in your file that looks like this:
 
+```
 class CfgFunctions
 {
 	(SOME CODE)
 };
+```
 
 Check any files that are added using an "#include" statement
 If you do please follow instrucutions labeled EXSITING CFG SECTION
@@ -119,7 +121,7 @@ Add this to the next line and save your file
 #include "addons\DEMS\DEMSplayer.hpp"
 ```
  
-### Configuration (EXILE)
+#### Configuration (EXILE)
 
 Most of the DEMS and DAPE configuration can be found in the /addons/DEMS/config.sqf file
 This allows you to tweak most of the settings for both the main system as well as the DAPE system and some of the DyCE options
@@ -139,7 +141,7 @@ _/addons/DEMS/EMS/DyCE/lootConfig.sqf_ - This defines the type of loot that is b
 
 NOTE: This will be moved to the main DEMS config file in future versions
 
-### Adding your custom content
+#### Adding your custom content
 
 The CAMS system requires a new directory to be created from the template files.  There are two files:
 Assets.sqf - Used mainly for the FuMS Mission Generator (Future integration, this has not been released
@@ -262,20 +264,20 @@ AFTER:
 DEMS_CAMS_cartList = 	[	// Name of CART directory 
 							"jets",
 							"apex",
-							"rhfusaf"
+							"rhsusaf"
 						];
 ```
 
 Save your file, re-PBO your missionfile, and enjoy.
 
-### Troubleshoting
+#### Troubleshoting
 
 Most likely, you missed a comma, or addede an extra one at the end of the lists.  Check carefully.
 
 If you are having problems with any of the missions, turn on the debug mode for the problem
 module and we'll see if we can figure it out.
 
-### Known issues
+#### Known issues
 
 - [ ] Sometimes convoys crash - Yeah, Arma logic is tricky.  I'll keep playing with it but things are far from perfect
 
