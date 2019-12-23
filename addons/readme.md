@@ -13,9 +13,11 @@ This means there are still some weird bits of code that I am working out.  Pleas
 
 *0.93* - Added debug code, corrected error in AI poptbas code, moved more configu items to the main config file
 Added in custom killfeed system for future fucntinality to add in respect code
+
 12/20/19
 
 *0.92* - Removed last of custom announcement code
+
 12/11/19
 
 *0.91* - Major rewrite of launch code, install instructions and repairs to system
@@ -24,6 +26,7 @@ Corrected some major issues and added comments to files for customizations
 I have a lon way to go and I'm adding in content when I have time
 
 *0.9* - Beta release
+
 11/11/19
 
 This is the beta release of the DEMS system which inlcudes DyCE (Dynamic Convoy
@@ -45,7 +48,7 @@ pre-load the global variables used throughout my add-ons.  You can use the exist
 or the included template files to add your own CART file.  See installation and configuration 
 section on how to include your assets in the system.
 
-**ImFX File** - These files are located in the addons\DEMS\CAMS\carts\(content name) directories and 
+**ImFX File** - These files are located in the **addons\DEMS\CAMS\carts\(content name)** directories and 
 the ImmersionFX system uses the global variables from the CART system to populate
 additional global variables that are used in the actual code for the dynamic events and other
 add-ons.  While the CAMS system loads all content into the system, the ImFX system loads specific
@@ -123,19 +126,19 @@ Add this to the next line and save your file
  
 #### Configuration (EXILE)
 
-Most of the DEMS and DAPE configuration can be found in the /addons/DEMS/config.sqf file
+Most of the DEMS and DAPE configuration can be found in the **/addons/DEMS/config.sqf** file
 This allows you to tweak most of the settings for both the main system as well as the DAPE system and some of the DyCE options
 
 
-***IMPORTANT OPTIONS:
-
-> (Line 28) FrSB_killfeed_Enabled = true;		// True - Enables custom kill feed messages
-> (Line 30) FrSB_killfeed_LogKills = true; 		// True - Log kills into the players.rpt file
-> (Line 45) DEMS_CAMS_useVanilla	= true;		// True - Loads Arma 3 Vanilla Content | False - Does not load vanilla assets | NOTE: If set to false, you need to be sure you have a VERY clean cart file that fills all minimum needs for system to run
-> (Line 46) DEMS_CAMS_useExile = true;			// True - Loads Exile Content | False - Does not load exile assets
-> (Line 59) DEMS_DAPE_debug = true;				// True - Turns on debug info for DAPE system and shortens timers | FALSE - System runs normal with no markers
-> (Line 101) DyCE_debug = false;				// True - Enabled enhanced logging for DyCE system to troubleshoot issues
-
+***IMPORTANT OPTIONS***
+```
+(Line 28) FrSB_killfeed_Enabled = true;		// True - Enables custom kill feed messages
+(Line 30) FrSB_killfeed_LogKills = true; 	// True - Log kills into the players.rpt file
+(Line 45) DEMS_CAMS_useVanilla	= true;		// True - Loads Arma 3 Vanilla Content | False - Does not load vanilla assets | NOTE: If set to false, you need to be sure you have a VERY clean cart file that fills all minimum needs for system to run
+(Line 46) DEMS_CAMS_useExile = true;		// True - Loads Exile Content | False - Does not load exile assets
+(Line 59) DEMS_DAPE_debug = true;			// True - Turns on debug info for DAPE system and shortens timers | FALSE - System runs normal with no markers
+(Line 101) DyCE_debug = false;				// True - Enabled enhanced logging for DyCE system to troubleshoot issues
+```
 
 The DyCE system can be configured in two files.  Use the exising files as templates until I fully comment them
 
